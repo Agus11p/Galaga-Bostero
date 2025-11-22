@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATAGALLINAS EN LA BOMBONERA</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Impact&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Login Screen -->
+        <div id="screen-login" class="screen active">
+            <div class="login-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Escudo_del_Club_Atl%C3%A9tico_Boca_Juniors_2012.svg"
+                    alt="Boca Juniors" class="logo">
+                <h1>MATAGALLINAS</h1>
+                <h2>EN LA BOMBONERA</h2>
+
+                <div class="buttons-container">
+                    <button id="btn-login" class="btn">INICIAR SESIÓN</button>
+                    <button id="btn-register" class="btn">HACERSE SOCIO</button>
+                </div>
+
+                <div id="login-form" class="form-container hidden">
+                    <input type="text" id="input-name" placeholder="NOMBRE (Ej: ROMAN)">
+                    <input type="number" id="input-dni" placeholder="DNI">
+                    <button id="btn-submit-login" class="btn">ENTRAR A LA CANCHA</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Screen (Carnet) -->
+        <div id="screen-welcome" class="screen hidden">
+            <div class="carnet-container">
+                <div class="carnet-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Escudo_del_Club_Atl%C3%A9tico_Boca_Juniors_2012.svg"
+                        alt="Boca" class="carnet-logo">
+                    <div>
+                        <h3>CLUB ATLÉTICO BOCA JUNIORS</h3>
+                        <p>SOCIO ACTIVO</p>
+                    </div>
+                </div>
+                <div class="carnet-body">
+                    <div class="photo-placeholder">👤</div>
+                    <div class="info">
+                        <p id="carnet-name">NOMBRE</p>
+                        <p id="carnet-number">Nº 12345678</p>
+                        <p>CATEGORÍA: HINCHA</p>
+                    </div>
+                </div>
+                <div class="carnet-footer">
+                    <p>LA MITAD MÁS UNO</p>
+                </div>
+            </div>
+            <p class="blink-text">PRESIONA CUALQUIER TECLA PARA ENTRAR</p>
+            <button class="btn" style="margin-top: 20px;">ENTRAR</button>
+        </div>
+
+        <!-- Menu Screen -->
+        <div id="screen-menu" class="screen hidden">
+            <div class="menu-container">
+                <h1>MENÚ PRINCIPAL</h1>
+
+                <!-- Player Profile Card -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">👤</div>
+                        <div class="profile-info">
+                            <h3 id="menu-user-name">JUGADOR</h3>
+                            <p id="menu-user-title" class="profile-title">Hincha</p>
+                            <p id="menu-user-socio" class="profile-socio">Socio Nº 12345678</p>
+                        </div>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Nivel</span>
+                            <span class="stat-value" id="menu-level">1</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">XP</span>
+                            <div class="xp-bar">
+                                <div class="xp-fill" id="menu-xp-fill"></div>
+                                <span class="xp-text" id="menu-xp-text">0/100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Bar -->
+                <div class="stats-bar">
+                    <div class="stat-box">
+                        <span class="stat-icon">💰</span>
+                        <span id="menu-coins">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-icon">🐔</span>
+                        <span id="menu-kills">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-icon">🏆</span>
+                        <span id="menu-high-score">0</span>
+                    </div>
+                </div>
+
+                <!-- Menu Buttons -->
+                <button class="btn menu-btn" data-action="play">▶️ JUGAR</button>
+                <button class="btn menu-btn" data-action="shop">🛒 TIENDA</button>
+                <button class="btn menu-btn" data-action="achievements">🏆 LOGROS</button>
+                <button class="btn menu-btn" data-action="ranking">📊 RANKING</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="screen-game" class="screen hidden">
+            <canvas id="game-canvas" tabindex="0"></canvas>
+            <div class="game-hud">
+                <div>🐔 <span id="game-score">0</span></div>
+                <div>❤️ <span id="game-lives">3</span></div>
+                <div>Oleada: <span id="game-wave">1</span></div>
+            </div>
+
+            <!-- Power-up HUD -->
+            <div id="powerup-hud" class="powerup-hud hidden">
+                <div class="powerup-icon" id="powerup-icon">⚡</div>
+                <div class="powerup-info">
+                    <div class="powerup-name" id="powerup-name">Power-Up</div>
+                    <div class="powerup-timer" id="powerup-timer">5.0s</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pause Screen -->
+        <div id="screen-pause" class="screen hidden">
+            <div class="menu-container">
+                <h1>PAUSA</h1>
+                <button id="btn-resume" class="btn">CONTINUAR</button>
+            </div>
+        </div>
+
+        <!-- Shop Screen -->
+        <div id="screen-shop" class="screen hidden">
+            <div class="shop-container">
+                <h2>⬆️ MEJORAS</h2>
+                <div class="shop-balance">
+                    <span>💰 Monedas: <strong id="shop-coins">0</strong></span>
+                </div>
+
+                <div id="shop-content" class="shop-content">
+                    <!-- Upgrades injected by JS -->
+                </div>
+
+                <button class="btn btn-back">⬅️ VOLVER</button>
+            </div>
+        </div>
+
+        <!-- Achievements Screen -->
+        <div id="screen-achievements" class="screen hidden">
+            <div class="menu-container">
+                <h2>🏆 LOGROS</h2>
+                <div class="achievements-summary">
+                    <p>Desbloqueados: <strong id="achievements-unlocked">0</strong> / <strong
+                            id="achievements-total">14</strong></p>
+                </div>
+                <div class="achievements-list" id="achievements-list">
+                    <!-- Achievements injected by JS -->
+                </div>
+                <button class="btn btn-back">⬅️ VOLVER</button>
+            </div>
+        </div>
+
+        <!-- Ranking Screen -->
+        <div id="screen-ranking" class="screen hidden">
+            <div class="menu-container">
+                <h2>MEJORES JUGADORES</h2>
+                <div class="ranking-list">
+                    <!-- Ranking items injected by JS -->
+                </div>
+                <button class="btn btn-back">VOLVER</button>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="screen-gameover" class="screen hidden">
+            <div class="menu-container">
+                <h1>FIN DEL PARTIDO</h1>
+                <div class="stats-container">
+                    <p>GALLINAS MATADAS: <span id="result-kills">0</span></p>
+                    <p>TIEMPO JUGADO: <span id="result-time">00:00</span></p>
+                    <p>BONUS: <span id="result-bonus">0</span></p>
+                    <hr>
+                    <p class="total-score">TOTAL PUNTOS: <span id="result-total">0</span></p>
+                    <p>MONEDAS GANADAS: <span id="result-coins">0</span></p>
+                </div>
+                <button id="btn-menu" class="btn">VOLVER AL MENÚ</button>
+            </div>
+        </div>
+
+        <!-- Notification System -->
+        <div id="notifications-container"></div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
