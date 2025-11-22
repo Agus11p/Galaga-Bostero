@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset - Galaga Bostero</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #001489, #000);
+            color: #FFD700;
+            font-family: 'Impact', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #FFD700;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0 0 20px 0;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        button {
+            background: #FFD700;
+            color: #001489;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            font-family: 'Impact', sans-serif;
+            cursor: pointer;
+            border-radius: 8px;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .danger {
+            background: #FF0000;
+            color: white;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔄 RESET TOTAL</h1>
+        <p>Esto va a borrar TODOS tus datos:</p>
+        <ul style="text-align: left; display: inline-block;">
+            <li>Monedas</li>
+            <li>Nivel y XP</li>
+            <li>Items comprados</li>
+            <li>Logros</li>
+            <li>Ranking</li>
+            <li>Usuario registrado</li>
+        </ul>
+        <p><strong>⚠️ Esta acción NO se puede deshacer</strong></p>
+
+        <button class="danger" onclick="resetAll()">BORRAR TODO</button>
+        <button onclick="goBack()">VOLVER</button>
+
+        <div id="status"></div>
+    </div>
+
+    <script>
+        function resetAll() {
+            const confirm = window.confirm('¿ESTÁS SEGURO? Se va a borrar TODO.');
+            if (confirm) {
+                // Clear all localStorage
+                localStorage.clear();
+
+                const status = document.getElementById('status');
+                status.textContent = '✅ ¡Datos borrados!';
+                status.style.color = '#00FF00';
+
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            }
+        }
+
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>
