@@ -100,13 +100,20 @@ export class GameEngine {
         // Screen shake on explosion
         this.visualEffects.shake(3, 150);
 
-        // Create enhanced particles
-        for (let i = 0; i < 20; i++) {
+        // Limit total particles to avoid performance spikes
+        const MAX_PARTICLES = 300;
+        if (this.particles.length >= MAX_PARTICLES) {
+            // Too many particles, skip adding more for this explosion
+            return;
+        }
+        const particlesToAdd = Math.min(30, MAX_PARTICLES - this.particles.length);
+        // Distribute between explosion particles and sparks proportionally
+        const explosionCount = Math.floor(particlesToAdd * 0.66); // ~20 of 30
+        const sparkCount = particlesToAdd - explosionCount;
+        for (let i = 0; i < explosionCount; i++) {
             this.particles.push(new EnhancedParticle(x, y, color, 'explosion'));
         }
-
-        // Add some sparks
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < sparkCount; i++) {
             this.particles.push(new EnhancedParticle(x, y, '#FFD700', 'spark'));
         }
     }
